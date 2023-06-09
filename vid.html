@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ESPORTZ</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      #video-container {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="video-container">
+      <video id="myVideo" width="640" height="360" autoplay muted controls>
+        <source src="./istockphoto-840142960-640_adpp_is (1).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <script>
+      setTimeout(function() {
+        window.open("./indexx.html", "_blank");
+      }, 7000);
+    </script>
+  </body>
+</html>

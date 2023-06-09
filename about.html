@@ -1,0 +1,35 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ABOUT</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <script>
+        var i =0;
+        var txt = "Welcome to our online sports coaching website, where we offer personalized coaching programs and training plans for athletes of all levels. Whether you're a beginner looking to develop your skills or an experienced athlete striving to take your game to the next level, we have the expertise and resources to help you achieve your goals.Our team of experienced coaches are passionate about sports and have years of experience coaching athletes across a wide range of disciplines.Our online coaching platform is designed to make coaching accessible to athletes all over the world. With our easy-to-use interface, you can access your coaching program from anywhere, at any time. You'll have access to video tutorials, exercise demonstrations, and personalized feedback from your coach, all from the comfort of your own home.So whether you're looking to improve your speed, agility, endurance, strength, or overall performance, our online sports coaching website is the perfect place to start.Let us help you achieve your athletic goals and become the best athlete you can be!";
+        var speed = 50;
+
+        function typeWriter()
+        {
+            if (i < txt.length)
+            {
+                document.getElementById("abt").innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+    </script>
+    <body onload="typeWriter()" style="background-color: black;">
+        <center>
+            <div class="e-sportz_logo">
+                <img src="images/E-SPORTZ_LOGO-transformed.png" width=180px height=120px>
+            </div>
+            <div class="about">
+                <p id="abt"></p>
+            </div>
+        </center>
+    </body>
+</html>

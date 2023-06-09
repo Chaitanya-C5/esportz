@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SPORT</title>
+  <link rel="stylesheet" href="sport_display.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@1,300&family=Pacifico&display=swap');
+    h2{
+      font-family: 'Cormorant Infant', serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="coach-header">
+    <div class="coachd">
+      <h3 id="sportName" class="name">Lorem</h3>
+    </div>
+    <div class="navigation">
+        <ul>
+          <li class="list active">
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+              </span>
+              <span class="text">Home</span>
+            </a>
+          </li>
+          <li class="list">
+            <a id="profile" href="#">
+              <span class="icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </span>
+              <span class="text">Profile</span>
+            </a>
+          </li>
+          <li class="list">
+            <a  href="#">
+              <span class="icon">
+                <ion-icon name="log-out-outline"></ion-icon>
+              </span>
+              <span class="text">LOGOUT</span>
+            </a>
+          </li>
+          <div class="indicator"></div>
+        </ul>
+    </div>   
+  </div>
+  
+  <div class="main">
+    <div class="heading">
+      <h1>COACHES</h1>
+    </div>
+    <div class="coach_names">
+      <div class="hider">
+        <div class="subhider">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+      <script>
+        
+        window.onload = function() {
+          // Code to be executed when the page finishes loading
+          var sportClkd;
+          fetch('/getSportName',{
+              method:'POST',
+              headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+              sportClkd = data[0].sport;
+              document.getElementById('sportName').innerHTML = data[0].sport;
+              const coachNamesContainer = document.getElementsByClassName('coach_names')[0];
+
+              for (var i = 0; i < data.length; i++) {
+                //console.log(data[i].achievements," ",data[i].bio," ",data[i].username," ",data[i].email);
+                const box = document.createElement('div');
+                box.classList.add('hider');
+
+                const coachBox = document.createElement('div');
+                coachBox.classList.add('subhider');
+
+                const mem = document.createElement('div');
+                mem.style.display = 'flex';
+                mem.style.justifyContent = 'space-between';
+                mem.style.width = '50px';
+                mem.style.fontSize = 20 + "px";
+
+                const iconElement = document.createElement('ion-icon');
+                iconElement.setAttribute('name', 'people-outline');
+                iconElement.style.fontSize = 30 + "px";
+
+                const spanElement = document.createElement('span');
+                spanElement.innerHTML = data[i].memberCount;
+                
+                
+                mem.appendChild(iconElement);
+                mem.appendChild(spanElement);
+
+      
+                const coachName = document.createElement('h1');
+                coachName.style.color = '#00d0ff';
+                coachName.innerHTML = data[i].username;
+
+                coachBox.appendChild(coachName);
+                coachBox.appendChild(mem);
+          
+                box.appendChild(coachBox);
+
+                const coachEmail = document.createElement('h2');
+                coachEmail.innerHTML = data[i].email;
+                box.appendChild(coachEmail);
+
+                const ca = document.createElement('h3');
+                ca.style.color = '#4a53bc';
+                ca.innerHTML = "Achievements: ";
+                box.appendChild(ca);
+
+                const coachAchievements = document.createElement('p');
+                coachAchievements.innerHTML = data[i].achievements;
+                box.appendChild(coachAchievements);
+
+                const cb = document.createElement('h3');
+                cb.style.color = '#4a53bc';
+                cb.innerHTML = "Bio: ";
+                box.appendChild(cb);
+
+                const coachBio = document.createElement('p');
+                coachBio.innerHTML = data[i].bio;
+                box.appendChild(coachBio);
+
+                box.setAttribute('coach_name', data[i].username);
+
+                box.style.display = 'flex';
+
+                box.addEventListener('click', function(event) {
+                // Access attributes of the clicked element
+                  
+                  console.log("HI");
+                  const clickedBox = event.target;
+                  const sportName = sportClkd; 
+                  const coachName = clickedBox.getAttribute('coach_name');
+
+                  const sendData = {
+                    sport: sportName,
+                    coach: coachName
+                  };
+
+                  fetch('/clkd_sport', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(sendData)
+                  })
+                  .then(response => {
+                    
+                    const url = 'dev_coach_vdos.html';
+                    window.open(url);
+
+                    console.log("Data sent to the server successfully!");
+                  })
+                  .catch(error => {
+
+                    console.error("An error occurred while sending data to the server:", error);
+                  });
+                });
+
+                coachNamesContainer.appendChild(box);
+              }
+
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        };
+
+
+        
+      </script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <script>
+        const list = document.querySelectorAll(".list");
+
+        function activeLink() {
+        list.forEach((item) => item.classList.remove("active"));
+        this.classList.add("active");
+        }
+        list.forEach((item) => item.addEventListener("click", activeLink));
+      </script>
+
+</html>
+

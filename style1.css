@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+
+.container{
+    height: 95vh;
+    width: 90vh;
+    border:1px solid #ffffff;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top:50%;
+    left:50%;
+    border-radius: 5px;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.container::before{
+    content: "";
+    height: 150%;
+    width: 150%;
+    position: absolute;
+    background: conic-gradient(
+        /*#fd004c,
+        #fe9000,
+        #fff020,
+        #3edf4b,
+        #000000,
+        #3363ff,
+        #b102b7,
+        #fd004c*/
+
+        #00fff2,
+        #d420bc,
+        #00ff4c
+
+    );
+    left:-25%;
+    top:-25%;
+    animation:spin 2.5s infinite linear;
+}
+
+@keyframes spin{
+    100%{
+        transform: rotate(-360deg);
+    }
+}
+
+.inner-container{
+    content: "";
+    background-color: #1c1b29;
+    height: 97%;
+    width: 97%;
+    position: absolute;
+    top: 1.5%;
+    left: 1.5%;
+    border-radius: 5px; 
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    
+}
+
+
+.head{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.username{
+    color:rgb(39 255 0);
+    display: flex;
+    justify-content: center;
+}
+
+.fas{
+    color:white;
+}
+
+.fa-user-circle{
+    font-size: 60px;
+}
+
+.user-info .fas{
+    font-size: 25px;
+    color:#00fff2;
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 40px;
+}
+
+.left-profile{
+    display: inline;
+}
+
+.right-profile{
+    display: inline;
+    padding-left: 13px;
+}
+
+.info-display{
+    color:white;
+    display: inline;
+    font-size: 20px;
+}
+
+.bottom{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+#achievements, #descr{
+    
+    background-color: transparent;
+    color:white;
+    border:1px solid #00fff2;
+}
+
+.saver{
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: -25px;
+}
+
+.save{
+    font-family: 'Poppins', sans-serif;
+    width: 120px;
+    height: 35px;
+    background-color: #1c1b29;
+    color:white;
+    border: none;
+    border-image: linear-gradient(to right, #f00, #00f);
+    border-image-slice: 1;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(218, 8, 237, 0.5);
+
+}
+
+.save:hover{
+    color:#00fff2;
+}
+

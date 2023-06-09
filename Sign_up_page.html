@@ -1,0 +1,120 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Signup</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        
+        <style>
+            .radio{
+                color: white;
+                position: relative;
+                padding: 20px 20px 5px 0px;
+                font-size: 20px;
+            }
+            .signup-radio{
+                width: 20px;
+                height: 20px;
+                color: rgb(99, 94, 94);
+                position: relative; 
+                top: 5px;
+            }
+        </style>  
+    </head>
+    
+    <body style="background-color: #151515;">
+        <div class="signup-form">
+            <div class="signup-txt">SIGN UP</div>
+                
+
+            <div class="signup-form-block">
+                <div class="signup-left-form">
+                    <form name="form1" class="signup-left-form1">
+                        <div class="signup-field"> 
+                            <div class='fas fa-user-circle'></div>
+                            <label class="labels">Name</label> <br>
+                            <input class="signup-inputs" id="sname" type="text" name="name"  placeholder="Enter your name">
+                        </div>
+                    
+                        <div class="signup-field">
+                            <div class='fas fa-envelope'></div>
+                            <label class="labels">Email</label><br>
+                            <input class="signup-inputs" id="semail" type="email" name="email" placeholder="Enter your email">
+                        </div>
+                    
+                        <div class="signup-field">
+                            <div class='fas fa-lock'></div>
+                            <label class="labels">Password</label><br>
+                            <input class="signup-inputs" id="spwd" type="password" name="password" placeholder="Enter your password">
+                        </div>
+                    
+                        <div class="signup-field">
+                            <div class='fas fa-lock'></div>
+                            <label class="labels">Confirm Password</label><br>
+                            <input class="signup-inputs" id="scpwd" type="password" name="cpassword" placeholder="Re-enter your password">
+                        </div>
+                    
+                        <div class="signup-field">
+                            <div class='fas fa-phone'></div>
+                            <label class="labels">Phone Number</label> <br>
+                            <input class="signup-inputs" id="sph_no" type="text" name="phone" placeholder="Enter your phone number">
+                        </div>
+                    </form>                    
+                </div>
+
+                <div class="signup-right-form">
+                    <form name="form2" class="signup-right-form1">
+                        <div class="signup-field">
+                            <label class="labels">Enroll as: </label><br>
+                            <input class = "signup-radio" id = "ssradio" type="radio" name="role" value="student"> <span class='radio'>STUDENT </span>
+                            <input class = "signup-radio" id = "scradio" type="radio" name="role" value="coach"> <span class='radio'>COACH </span>
+                        </div>
+
+                        <div class="signup-field signup-field--age">
+                            <div class='fas fa-calendar-check'></div>
+                            <label class="labels">Age</label><br>
+                            <input class="signup-inputs" id = "sage" type="text" name="age" placeholder="Enter your Age">
+                        </div>
+
+                        <div class="signup-field signup-field--gen">
+                            <label class="labels">Gender</label><br>
+                            <input class = "signup-radio" id = "smradio" type="radio" name="gender" value="male"> <span class='radio'>MALE </span>
+                            <input class = "signup-radio" id = "sfradio" type="radio" name="gender" value="female"><span class='radio'>FEMALE </span>
+                        </div>
+
+                        <div class="signup-field signup-field--country">
+                            <div class='fas fa-map-marker-alt'></div>
+                            <label class="labels">Country</label><br>
+                            <select class="signup-inputs" id = "scountry" name="country">
+                                <option value="India">INDIA</option>
+                                <option value="USA">USA</option>
+                                <option value="UK">UK</option>
+                                <option value="Canada">CANADA</option>
+                            </select>
+                        </div>
+
+                        <div class="signup-field signup-field--fav_sport">
+                            <div class='fas fa-skiing'></div>
+                            <label class="labels">Favourite Sport</label> <br>
+                            <select class="signup-inputs" id = "signup-fav_sport" name="favouriteSport">
+                                <option value="cricket">CRICKET</option>
+                                <option value="chess">CHESS</option>
+                                <option value="football">FOOTBALL</option>
+                                <option value="badminton">BADMINTON</option>
+                                <option value="tennis">TENNIS</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>     
+
+            <button id="submit"  class="signup-btn">SIGN UP</button>
+        </div>
+    </body>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="code.js"> </script> 
+    
+</html>

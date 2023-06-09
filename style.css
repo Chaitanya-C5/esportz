@@ -1,0 +1,656 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,100;1,200&family=Roboto:wght@100;400&display=swap');
+
+html,body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.sec-1 {
+    background-image: url(images/football-1.jpeg);
+    position: relative;
+    height: 100%;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-size: cover;
+    overflow: hidden;
+    background-attachment: fixed;
+}  
+
+header{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    width: 100%;
+    height: 60px;
+    padding: 30px 60px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    font-size: 2em;
+    color: #4eb1f3;
+    pointer-events: none;
+    position: relative;
+    top: -18px;
+}
+
+.links a{
+    text-decoration: none;
+    color: black;
+    padding: 6px 15px;
+    margin: 0px 8px;
+    font-weight: 100;
+}
+
+.bg{
+    display: inline-block;
+    background-color: #1b3147bf;
+    font-size: 14px;
+    height: 33px;
+    line-height: 29px;
+    padding: 0 15px;
+    font-weight: 400;
+    margin-left: 10px;
+    border-radius: 0%;
+    box-shadow: -6px 7px black;
+    transition: 0.2s all;
+    position: relative;
+    right: 84px;
+    top: -26px;
+}
+.links a{
+    color: white
+}
+.links a:hover, .links a.active{
+    color: #4eb1f3;
+}
+
+.bg:active {
+    transform: scale(0.98);
+    box-shadow: -3px 5px black;
+}
+
+
+
+.P1{
+    top: 250px;
+    display: inline-block;
+    left: 230px;
+    color: #00ffe7;
+    margin-top: 20px;
+    font-size: 40px;
+    width: 250px;
+    position: relative;
+    right: 60px
+}
+
+#welcome{
+    opacity: 0; 
+    transition: opacity 4s ease-in-out;
+}
+
+.we1{
+    font-family: "Mona Sans","Mona Sans Fallback",
+    -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji",
+    "Segoe UI Emoji","Segoe UI Symbol";
+    color:white;
+    margin: 163px 0px 0px 20px;
+    font-size: 75px;
+}
+
+.we2{
+    color: #ffffff;
+    margin: 54px 0px 0px 16px;
+    font-size: 36px;
+    font-family: "Copperplate Gothic Light";
+}
+
+/* ---------------LOGIN-FORM STARTS HERE--------------------*/
+
+.reg {
+    display: flex;
+    height:100vh;
+    text-align: center;
+    font-family: 'Poppins' ;
+    align-items: center;
+    justify-content: center;
+    background: #151515;
+}
+
+.login-form{
+    position:relative;
+    width: 370px;
+    height: auto;
+    background: #1b1b1b;
+    padding: 40px 35px 60px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: inset 0 0 1px #272727;
+}
+
+.txt{
+    font-size:30px;
+    color: #0cb5ee;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.form1{
+    margin-top: 40px;
+}
+
+.form1 .field  {
+    margin-top:20px;
+    display: flex;
+}
+
+.field input, .form1 button{
+    height: 50px;
+    width:100%;
+    outline: none;
+    font-size: 19px;
+    color:#868686;
+    padding: 0 15px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #444;
+    caret-color: #339933;
+    background: linear-gradient(#333,#222);
+    animation: glow .8s ease-out infinite alternate;
+}
+@keyframes glow{
+    100%{
+        border-color: #0779ea;
+        box-shadow: 0 0 20px rgba(12, 195, 219, 0.1),
+                    inset 0 0 10px rgba(7, 219, 227, 0.1);
+    }
+}
+
+.field .fas,.field input:focus{
+    color: #09a3d2;
+    box-shadow: 0 0 5px rgba(7, 210, 224, 0.2),
+                inset 0 0 5px rgba(11, 217, 220, 0.1);
+    background: linearGradient(#0dd3e5,#222922);
+}
+
+.field .fas{
+    height: 50px;
+    width: 60px;
+    color: #17bbe8;
+    font-size: 20px;
+    line-height: 50px;
+    border: 1px solid #444;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    background: linear-gradient(#333,#222);
+}
+
+.form1 button{
+    margin-top: 30px;
+    border-radius: 5px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.form1 button:hover{
+    color: #16aacf;
+    border: 1px solid #0dcce1;
+    box-shadow: 0 0 5px rgba(13, 207, 232, 0.3),
+                0 0 10px rgba(0, 200, 255, 0.2),
+                0 0 15px rgba(0,255,0,.1),
+                0 2px 0 black;
+}
+
+.sgn{
+    margin-top: 25px;
+    color:#f5efef;
+}
+
+.sgn a{
+    color: #0eea0e;
+    text-decoration: none;
+}
+
+.sgn a:hover{
+    text-decoration: underline;
+    text-decoration-color:#659765;
+}
+/*---------------- LOGIN-FORM ENDS HERE ---------------*/
+
+
+/*---------------- ABOUT STARTS HERE ------------------*/
+
+.about{
+    line-height:39px;
+    position: relative;
+    top: 140px;
+    left: 10px;
+    color:#0dcce1;
+    font-size: 23px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 200;
+    width:1000px;
+    text-align: justify;
+    text-justify: inter-word;
+    overflow: hidden;
+}
+
+.e-sportz_logo{
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    width: 100%;
+    height: 60px;
+}
+
+/*---------------- ABOUT ENDS HERE ------------------*/
+
+/*----------------SIGN UP STARTS HERE -----------------*/
+
+.signup-form{
+    width: 1000px;
+    position: relative;
+    top: 80px;
+    display: flex;
+    background-color: #1b1b1b;
+    margin: auto;
+    height: 802px;
+}
+
+.signup-txt{
+    display: block;
+    color: #0cb5ee;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 50px;
+    margin: 30px 0px 0px 385px;
+    height: 80px;
+}
+.signup-form-block{
+    background: transparent;
+    position: absolute;
+    padding: 0px;
+    top: 130px;
+    width: 900px;
+    height: 559px;
+    display: flex;
+    margin: 0px 0px 0px 50px;
+}
+.signup-left-form{
+    position: relative;
+    background: transparent;
+    height: 400px;
+    width: 400px;
+}
+
+.signup-right-form{
+    position: relative;
+    background: transparent;
+    height: 400px;
+    width: 400px;
+    left: 130px;
+    top: -1.5px;
+    padding: 5px 0px 0px 0px;
+}
+
+.temp{
+    position: relative;
+    top: 150px;
+}
+    
+.labels{
+    font-size: 25px;
+    color: #17bbe8;
+}
+
+.signup-field{
+    padding: 20px 20px 0px;
+    line-height: 35px;
+}
+
+.signup-field--age{
+    position: relative;
+    top: 12px;
+}
+
+.signup-field--gen{
+    position: relative;
+    top: 25px;
+}
+
+.signup-field--country{
+    position: relative;
+    top: 30px;
+}
+
+.signup-field--fav_sport{
+    position: relative;
+    top: 28px;
+}
+
+.signup-inputs{
+    padding: 8px;
+}
+
+.signup-field .fas{
+    color: #17bbe8;
+    font-size: 20px;
+}
+
+.signup-inputs:focus{
+    color: #09a3d2;
+    box-shadow: 0 0 5px rgba(7, 210, 224, 0.2),
+                inset 0 0 5px rgba(11, 217, 220, 0.1);
+    background: linearGradient(#0dd3e5,#222922);
+}
+.signup-inputs , .signup-btn{
+    height: 50px;
+    width: 320px;
+    outline: none;
+    font-size: 19px;
+    color: #868686;
+    padding: 0 15px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #444;
+    caret-color: #339933;
+    background: linear-gradient(#333,#222);
+    animation: glow .8s ease-out infinite alternate;
+}
+@keyframes glow{
+    100%{
+        border-color: #0779ea;
+        box-shadow: 0 0 20px rgba(12, 195, 219, 0.1),
+                    inset 0 0 10px rgba(7, 219, 227, 0.1);
+    }
+}
+
+.signup-btn{
+    border-radius: 5px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 270px;
+    position: relative;
+    top: 733px;
+    right: 208px;
+}
+
+.signup-btn:hover{
+    color: #16aacf;
+    border: 1px solid #0dcce1;
+    box-shadow: 0 0 5px rgba(13, 207, 232, 0.3),
+                0 0 10px rgba(0, 200, 255, 0.2),
+                0 0 15px rgba(0,255,0,.1),
+                0 2px 0 black;
+}
+
+/* --------------- SIGN UP ENDS HERE ----------------*/
+
+/*----------------SPORTS BANNER STARTS HERE ---------*/ 
+.sports-banner-sec{
+    
+    overflow: hidden;
+    position: relative;
+    height: 318px;
+}
+.banner-container{
+    display: grid;
+    margin:15px auto;
+    width: 100%;
+    border:5px solid black;
+    grid-template-rows: 200px;
+    grid-template-columns: repeat(5, minmax(250px, 1fr));
+    grid-template-areas: 'b1 b2 b3 b4 b5 b6';
+}
+
+.cricket-txt{
+    color:white;
+    position: absolute;
+    top: 184px;
+    left: 98px;
+}
+
+.football-txt{
+    position: absolute;
+    top: 184px;
+    left: 401px;
+}
+
+.badminton-txt{
+    position: absolute;
+    top: 184px;;
+    left: 715px;
+}
+
+.chess-txt{
+    position: absolute;
+    top: 184px;
+    left: 1050px;
+}
+
+.viewall-txt{
+    position: absolute;
+    top: 184px;
+    left: 1322px;
+}
+.material-symbols-outlined{
+    transform: rotate(180deg);
+    position: relative;
+    bottom: 157px;
+    left: 81px;
+    color: #252525
+}
+
+.material-symbols-outlined:hover{
+    transform: translate(0px,2px);
+}
+
+.imgs{
+    opacity: 0.5;
+    width: 100%;
+    height: 200px;
+}
+
+
+
+.cricket-card{
+    grid-area: b1;
+}
+
+.football-card{
+    grid-area: b2;
+}
+
+.badminton-card{
+    grid-area: b3;
+}
+
+.banner-container a{
+    color:#000000;
+}
+
+.img-badminton{
+    transform: rotate(180deg);
+    opacity: 0.8;
+}
+
+.img-chess{
+    transform: rotate(180deg);
+    position: relative;
+    width: 100px;
+    left: -25px;
+    top: -1px;
+}
+
+.imgs:hover{
+    opacity:1;
+
+}
+
+
+/*----------------SPORTS BANNER ENDS HERE ---------*/ 
+
+/*---------------- CARDS STARTS HERE --------------*/
+
+.cards {
+    
+    height: 400px;
+    width:100%;
+    
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+.row {
+    display: grid;
+
+    grid-template-rows: repeat(1,400px);
+    grid-template-columns: repeat(4,25%);
+
+}
+.col 
+{
+    height:350px;
+    padding : 15px 20px;
+    box-sizing: border-box;
+}
+.icon-box {
+    background-color: #000000eb;
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #17bbe8;
+}
+.icon-box img {
+    filter: brightness(0) invert(1);
+}
+.icon-box h4, .icon-box p {
+    color: #fff;
+}
+.icon-box a.btn.red {
+    background-color: #17bbe8;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/*---------------- CARDS ENDS HERE --------------*/
+
+/*---------------- FOOTER STARTS HERE --------------*/
+
+
+.footer {
+    width: 100%;
+    background-color: black;
+    color: white;
+ }
+
+/*---------------- FOOTER ENDS HERE --------------*/
+
+/*---------------- DEP STARTS HERE --------------*/
+ .container1 {
+    font-family: Arial;
+    box-sizing: border-box;
+    font-size: 17px;
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.container1 img {vertical-align: middle;}
+
+.container1 .content {
+position: absolute;
+bottom: 0px;
+background: rgb(0, 0, 0); 
+background: rgba(0, 0, 0, 0.5); 
+color: #f1f1f1;
+width: 48%;
+height:815px;
+padding: 20px;
+}
+.para {
+font-size: 21px;
+font-weight: 1rem; 
+}
+.hi {
+margin-bottom: 15px;
+}
+.goes {
+position: absolute;
+top: 50px;
+}
+
+.join_now{
+    width:100px;
+    background-color:#0CB5EE;
+    color:white;
+    height:50px;
+    margin-top:12px;
+    border-radius: 5px;
+    position: relative;
+    left:300px;
+    line-height: 15px;
+
+}
+
+/*----------------  DEP ENDS HERE --------------*/
+
+
+/*---------------- INDEX2 STARTS HERE -------------*/
+
+.circle {
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border-radius: 50%;
+    position: relative;
+    right: 76px;
+    top: -13px;
+}
+
+.myDropdown {
+    position: absolute;
+    z-index: 1;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 130px;
+}
+
+.dropcolor{
+    background: white;
+}
+
+#profile{
+    position:relative;
+    right:26px;
+    top:-3px;
+}
+/* Style for the dropdown options */
+.myDropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Style for the hover effect on options */
+.myDropdown .dropcolor:hover {
+    background-color: #100f0f;
+    color: #4eb1f3;
+}
+
+/*------------------ INDEX2 ENDS HERE ---------------->
+
+
+

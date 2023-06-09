@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coach Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="coach-header">
+    <div class="coachd">
+      <h3 class="name">COACH DASHBOARD</h3>
+    </div>
+    <div class="navigation">
+        <ul>
+          <li class="list active">
+            <a onclick="showHome()"href="#">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+              </span>
+              <span class="text">Home</span>
+            </a>
+          </li>
+          <li class="list">
+            <a id="profile" href="./coach-profile.html">
+              <span class="icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </span>
+              <span class="text">Profile</span>
+            </a>
+          </li>
+          <li class="list">
+            <a id="my-videos-btn" href="#">
+              <span class="icon">
+                <ion-icon name="play-outline"></ion-icon>
+              </span>
+              <span class="text">My Videos</span>
+            </a>
+          </li>
+          <li class="list">
+            <a onclick="videoUpload()" href="#">
+              <span class="icon">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+              </span>
+              <span class="text">Upload</span>
+            </a>
+          </li>
+          <li class="list">
+            <a onclick="myFunction()" href="#">
+              <span class="icon">
+                <ion-icon name="log-out-outline"></ion-icon>
+              </span>
+              <span class="text">LOGOUT</span>
+            </a>
+          </li>
+          <div class="indicator"></div>
+        </ul>
+    </div>   
+  </div>
+
+  <div class="main-body">
+    <div class="bgimg">
+      <img src="./images/coach_page_bg.jpg" alt="football">
+    </div>
+    <div id="upload-modal"  class="modal">
+      <div class="modal-content glass">
+        <span class="close">&times;</span>
+        
+        <form id="upload-form" enctype="multipart/form-data">
+          <label for="title">Title:</label>
+          <input class="inputs" type="text" id="title" name="title" required>
+          <br>
+          <label for="description">Description:</label>
+          <textarea class="inputs" id="description" name="description"></textarea>
+          <br>
+          <label for="video">Video File:</label>
+          <input style="color:white;" type="file" id="video" name="video" required>
+          <br>
+          <div class="sub-btn">
+            <button class="up" type="submit">Upload</button>
+          </div>
+        </form>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="parent">
+    <div id="homeside" class="homeside">
+      <div class="heading">
+        <h1>Welcome to your page </h1>
+      </div>
+  
+      <div class="sub-heading">
+        <p> 
+          Upload videos and gain popularity.<br><br>
+          Join the coaching community and<br> share your knowledge through video.<br><br>
+          Unleash your coaching power with<br> our user-friendly video upload system.&nbsp;
+        </p>
+      </div>
+  </div>
+  <div id="video-container">
+  </div>
+  </div>
+  
+   
+</body>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script src="dash.js"></script>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <script>
+        const list = document.querySelectorAll(".list");
+
+        function activeLink() {
+        list.forEach((item) => item.classList.remove("active"));
+        this.classList.add("active");
+        }
+        list.forEach((item) => item.addEventListener("click", activeLink));
+        document.getElementById('video-container').style.display = "none";
+
+        function myFunction()
+        {
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                
+            })
+            .then(response => {
+                window.location.replace("./indexx.html");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        }
+      </script>
+
+</html>
+
+<!--
+  
+-->

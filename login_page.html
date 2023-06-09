@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LOGIN_PAGE</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="reg">
+            <div class="login-form">
+                <div class="txt">LOGIN</div>
+                <form name="lform" class="form1">
+                    <div class="field">
+                        <div class='fas fa-envelope'></div>
+                        <input id = "login-email" type="email" name="email" placeholder="Enter your email">
+                    </div>
+                    <div class="field">
+                        <div class='fas fa-lock'></div>
+                        <input id = "login-pwd" type="password" name="pwd" placeholder="Enter your password">
+                    </div>
+                    <button onclick="validatelogin()">LOGIN</button>
+                    <div class="sgn">
+                        Not a member?
+                        <a href="Sign_up_page.html"> Signup now</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script>
+        let isValid = true;
+        function validateEmail() 
+        {
+            var email = document.lform.email.value;
+            
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(email) && email !== '') 
+            {
+                isValid =  true;
+            } 
+            else 
+            {
+                alert("Email Invalid");
+                isValid =  false;
+            }
+        }
+        function validatePassword() 
+        {
+            var password = document.lform.pwd.value;
+            password = password.trim();
+
+            if (password.length >= 5 && password.length <= 20) 
+            {
+                isValid =  true;
+            } 
+            else 
+            {
+                alert("Password minimum length should be 5 and maximum length can be 20");
+                isValid =  false;
+            }
+        }
+        function validatelogin()
+        {
+            //document.write(document.lform.email.value);
+            isValid = true;
+            const data = {
+                email: document.lform.email.value,
+                password: document.lform.pwd.value
+            };
+
+            validateEmail();
+            if(isValid) validatePassword();
+
+            if(isValid)
+            {
+                fetch('/submit-lform', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    if(data.message === "Incorrect password"){
+                        console.log(data.message);
+                        alert(data.message);
+                    }
+                    
+                    else if(data.message === "coach")
+                        window.location.href = "./coach_page.html";
+                    
+                    else
+                        window.location.href = "./index2.html";
+                        
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            }
+        }
+    </script>
+</html>

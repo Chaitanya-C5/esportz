@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --clr: #363a45;/*#222327;*/
+}
+
+.name{
+  margin-left: 28px;
+  font-size: 40px;
+}
+
+.coach-header {
+  display: flex;
+  height: 105px;
+  background-color: #272b34;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 1px 2px 18px #272b34;
+  color: white;
+  width: 100%;
+}
+.navigation {
+  position: relative;
+  width: 210px;
+  height: 70px;
+  /**/
+  background: #272b34;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  top:15px;
+}
+.navigation ul {
+  display: flex;
+  width: 350px;
+}
+.navigation ul li {
+  position: relative;
+  list-style: none;
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+}
+.navigation ul li a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.8em;
+  text-align: center;
+  transition: 0.5s;
+  color: white;
+}
+.navigation ul li.active a .icon {
+  transform: translateY(-32px);
+}
+.navigation ul li a .text {
+  position: absolute;
+  color: white;
+  font-weight: 600;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.navigation ul li.active a .text {
+  opacity: 1;
+  transform: translateY(10px);
+}
+.indicator {
+  position: absolute;
+  top: -50%;
+  width: 70px;
+  height: 70px;
+  background: #00d0ff;
+  border-radius: 50%;
+  border: 6px solid #272b34;
+  transition: 0.5s;
+}
+.indicator::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 1px -10px 0 0 #272b34;
+}
+.indicator::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: -1px -10px 0 0 #272b34;
+}
+
+/* Indicator Transitions */
+.navigation ul li:nth-child(1).active ~ .indicator {
+  transform: translateX(calc(70px * 0));
+}
+.navigation ul li:nth-child(2).active ~ .indicator {
+  transform: translateX(calc(70px * 1));
+}
+.navigation ul li:nth-child(3).active ~ .indicator {
+  transform: translateX(calc(70px * 2));
+}
+.navigation ul li:nth-child(4).active ~ .indicator {
+  transform: translateX(calc(70px * 3));
+}
+.navigation ul li:nth-child(5).active ~ .indicator {
+  transform: translateX(calc(70px * 4));
+}
+
+
+.main{
+  background-color: white;
+}
+
+.coach_names{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  gap:2em;
+  background-color: white;
+}
+
+.hider{
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2em;
+  align-items: flex-start;
+  background-color: white;
+  color: black;
+  width:65%;
+  gap:5px;
+  padding: 17px 22px;
+  border-radius: 15px;
+  box-shadow: 1px 2px 18px #212020;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.hider:hover{
+  transform: scale(1.2);
+  background-color: black;
+  color: white;
+  box-shadow: 1px 2px 18px #ffffff;
+}
+
+.subhider{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  background-color: white;
+}
+
+.heading h1{
+  font-size: 50px;
+  color: black;
+}
+
+
+#video-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap:20px;
+}
+
+.btn-teamUp{
+  position: relative;
+  top:80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-teamUp button{
+  width:140px;
+  height:50px;
+  border-radius:5px;
+  background: linear-gradient(45deg, #0749e0, #00d0ff);
+  color:#000000;
+  border:none;
+  font-size: 20px;
+  transition: 0.5s;
+  box-shadow: 1px 2px 18px #414e6b;
+  margin-bottom: 35px;
+}
+
+.btn-teamUp button:hover{
+  transform:scale(1.2);
+  color:white;
+  background: black;
+}
+
+.coach_name_dis{
+  text-align: center;
+  position: relative;
+  top:15px;
+  margin-bottom: 60px;
+  color:#00d0ff;
+  font-size: 30px;
+}

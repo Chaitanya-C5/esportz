@@ -1,0 +1,123 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>COACH-PROFILE</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style1.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    </head>
+    <body style="background-color: #151320;">
+        <div class="container">
+            <div class="inner-container">
+                <div class="head">
+                    <span class="fas fa-user-circle"></span>
+                </div>
+                <h2 id="username" class="username">
+                    Lorem.
+                </h2>
+                
+                <div class="user-info">
+                    <div class="left-profile">
+                        <i class="fas fa-user-tag"></i> &nbsp;&nbsp;
+                        <h4 class="info-display" id="user-name">
+                            Lorem ipsum dolor sit, 
+                        </h4><br><br><br>
+                
+                        <i class="fas fa-envelope"></i> &nbsp;&nbsp;
+                        <h4 class="info-display" id="email">
+                            Lorem ipsum dolor sit, 
+                        </h4><br><br><br>
+                
+                        <i class="fas fa-venus-mars"></i> &nbsp;&nbsp;
+                        <h4 class="info-display" id="gender">
+                            Lorem ipsum dolor sit, 
+                        </h4><br><br><br>
+                    </div>
+                
+                    <div class="right-profile">
+                        <i class="fas fa-phone"></i> &nbsp;&nbsp;
+                        <h4 class="info-display" id="phno">
+                            Lorem ipsum dolor sit, 
+                        </h4><br><br><br>
+                
+                        <i class="fas fa-flag"></i> &nbsp;&nbsp;
+                        <h4 class="info-display" id="country">
+                            Lorem ipsum dolor sit, 
+                        </h4><br><br><br>
+                
+                        <i class="fas fa-running"></i> &nbsp;&nbsp;
+                        <h4 class="info-display" id="favsport">
+                            Lorem ipsum dolor sit, 
+                        </h4><br><br><br>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <textarea name="achievements" id="achievements" cols="30" rows="10" required="required"></textarea>
+                    <textarea name="descr" id="descr" cols="30" rows="10" required="required"></textarea>
+                </div>
+                <div class="saver">
+                    <button onclick="validateProfile()" name="save" class="save" id="save">Save</button>
+                </div>
+            </div>
+        </div>
+        
+        
+    </body>
+
+    <script>
+        let ans;
+        function validateProfile()
+        { 
+            ans.achievements = document.getElementById('achievements').value;
+            ans.bio = document.getElementById('descr').value;
+            fetch('/updateProfile', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ans)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                });
+                
+        }
+        function display(data)
+        {
+            console.log(data);
+            document.getElementById('username').textContent = data.name;
+            document.getElementById('username').style.textTransform = "capitalize";
+            document.getElementById('user-name').textContent = data.name;
+            document.getElementById('email').textContent = data.email;
+            document.getElementById('gender').textContent = data.gender;
+            document.getElementById('favsport').textContent = data.favsport;
+            document.getElementById('country').textContent = data.country;
+            document.getElementById('phno').textContent = data.phno;
+            document.getElementById('achievements').value = data.achievements;
+            document.getElementById('descr').value = data.bio;
+            if(Object.keys(data).length === 8)
+            {
+                
+            }
+
+            ans = data;
+
+        }
+        window.onload = function()
+        {
+            fetch('/profile', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                display(data.message);
+            });
+        };
+    </script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Two Forms Example</title> =>
+</head>
+<body>
+	<h1>Two Forms Example</h1>
+	<form id="form1">
+		<input type="text" name="name1">
+		<input type="email" name="email1">
+	</form>
+	  
+	<form id="form2">
+	<input type="text" name="name2">
+	<input type="email" name="email2">
+	</form>
+	  
+	<button id="submit">Submit</button>
+	  
+
+	<script>
+		const submitBtn = document.getElementById('submit');
+
+		submitBtn.addEventListener('click', function() {
+			const form1Data = new FormData(document.getElementById('form1'));
+			const form2Data = new FormData(document.getElementById('form2'));
+
+			const data = {
+				name1: form1Data.get('name1'),
+				email1: form1Data.get('email1'),
+				name2: form2Data.get('name2'),
+				email2: form2Data.get('email2')
+			};
+
+			fetch('/submit-form', {
+				method: 'POST',
+				headers: {
+				'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => {
+				if (response.ok) {
+				console.log('Form data submitted successfully');
+				} else {
+				console.log('Error submitting form data');
+				}
+			});
+		});
+
+	</script>
+</body>
+</html>
