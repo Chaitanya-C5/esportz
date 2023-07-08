@@ -32,7 +32,7 @@
                     </a>
                   </li>
                   <li class="list">
-                    <a  href="#">
+                    <a  onclick="myFunction()" href="#">
                       <span class="icon">
                         <ion-icon name="log-out-outline"></ion-icon>
                       </span>
@@ -324,6 +324,24 @@
                     allDivs[i].style.filter = 'none';
                     allDivs[i].style.transform = 'scale(1)';
                 }
+            }
+
+            function myFunction()
+            {
+                fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    
+                })
+                .then(response => {
+                    window.location.replace("./indexx.html");
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
             }
 
             // Select all elements with the specified class

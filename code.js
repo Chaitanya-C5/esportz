@@ -219,8 +219,10 @@ submitBtn.addEventListener('click', function() {
                             Body : "Welcome to E-SPORTZ now you are one of our team member..."
                         })
                         
-
-                        window.location.href = "./login_page.html";
+                        setTimeout(function() {
+                            window.location.href = "./login_page.html";
+                          }, 5000);
+                        
                 })
                 .catch(error => {
                     console.error(error);

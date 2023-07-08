@@ -13,7 +13,7 @@
             <div class="navigation">
                 <ul>
                   <li class="list active">
-                    <a href="#">
+                    <a onclick="hideMsg()" href="#">
                       <span class="icon">
                         <ion-icon name="home-outline"></ion-icon>
                       </span>
@@ -21,7 +21,7 @@
                     </a>
                   </li>
                   <li class="list">
-                    <a id="profile" href="#">
+                    <a id="profile" href="./profiles.html">
                       <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                       </span>
@@ -29,7 +29,23 @@
                     </a>
                   </li>
                   <li class="list">
-                    <a  href="#">
+                    <a onclick="showMsg()" id="message" href="#">
+                      <span class="icon">
+                        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                      </span>
+                      <span class="text">Ask Coach</span>
+                    </a>
+                  </li>
+                  <li class="list">
+                    <a onclick="showReply()" id="reply" href="#">
+                      <span class="icon">
+                        <ion-icon name="arrow-undo-outline"></ion-icon>
+                      </span>
+                      <span class="text">Replies</span>
+                    </a>
+                  </li>
+                  <li class="list">
+                    <a  onclick="myFunction()" href="#">
                       <span class="icon">
                         <ion-icon name="log-out-outline"></ion-icon>
                       </span>
@@ -46,7 +62,14 @@
               <h1 id="cname">LOREM</h1>
             </div>
             <div id="video-container"></div>
+            <div id="msg-container">
+              <textarea id="msgBox" rows="5" cols="10" placeholder="Enter your doubt"></textarea>
+              <button id='send-btn' onclick="sendMsg()">Send</button>
+              <h3>This message will be sent to coach</h3>
+            </div>
+            <div id="reply-container">
 
+            </div>
             <div class="btn-teamUp">
               <button id="teamUpButton">Team Up</button>
             </div>
@@ -59,6 +82,126 @@
       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
       <script>
+        function sendMsg()
+        {
+          let msg = document.getElementById('msgBox').value;
+          console.log(msg);
+
+          const data = {msg : msg};
+          
+          fetch('/sendmsg',{
+            method:'POST',
+            headers:{
+              'Content-type':'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .catch(error => {
+              console.error(error);
+          });
+
+          alert("Message Sent");
+        }
+
+        function hideMsg()
+        {
+            document.getElementById('msg-container').style.display = 'none';
+            document.getElementById('video-container').style.display = 'flex';
+            document.getElementById('reply-container').style.display = 'none';
+        }
+
+        function showMsg()
+        {
+            document.getElementById('msg-container').style.display = 'flex';
+            document.getElementById('video-container').style.display = 'none';
+            document.getElementById('reply-container').style.display = 'none';
+        }
+
+        function showReply()
+        {
+            document.getElementById('msg-container').style.display = 'none';
+            document.getElementById('video-container').style.display = 'none';
+            document.getElementById('reply-container').style.display = 'flex';
+
+            var replier = document.getElementById('reply-container');
+
+            fetch('/showreplies',{
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+                for(var i=0;i<data.length;i++)
+                {
+                    console.log(i+" \n"+data[i]);
+                    const box = document.createElement('div');
+                    box.classList.add('replybox');
+                    const ques = document.createElement('div');
+                    const ans = document.createElement('div');
+
+                    const rq = document.createElement('h1');
+                    rq.innerHTML = data[i].message;
+                    rq.style.fontFamily = "Diphylleia";
+                    rq.style.color = '#00d0ff';
+
+                    var iconElement = document.createElement('ion-icon');
+                    iconElement.setAttribute('name', 'help-circle');
+                    iconElement.style.fontSize = "35px";
+                    iconElement.style.paddingTop = "8px";
+                    iconElement.style.fontStyle = "bold";
+
+                    const ra = document.createElement('h2');
+                    ra.innerHTML = data[i].reply;
+                    ra.style.fontFamily = 'Diphylleia';
+                    ra.style.fontSize = "25px";
+
+                    var ansElement = document.createElement('ion-icon');
+                    ansElement.setAttribute('name', 'attach');
+                    ansElement.style.fontSize = "33px";
+
+                    ques.appendChild(iconElement);
+                    ques.appendChild(rq);
+                    ques.style.display = "flex";
+                    ques.style.gap = "10px";
+
+                    ans.appendChild(ansElement);
+                    ans.appendChild(ra);
+                    ans.style.display = "flex";
+                    ans.style.gap = "10px";
+
+                    box.appendChild(ques);
+                    box.appendChild(ans);
+
+                    replier.appendChild(box);
+                }
+            })
+            .catch(error => {
+              console.error(error);
+            })
+        }
+        function myFunction()
+        {
+            setTimeout( () => {
+                fetch('/logout', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                }
+                
+            })
+            .then(response => {
+                window.location.replace("./indexx.html");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+            } , 3000);
+            
+        }
         const list = document.querySelectorAll(".list");
 
         function activeLink() {
@@ -77,7 +220,7 @@
         .then(response => response.json())
         .then(videos => {
 
-            
+            document.getElementById('msg-container').style.display = 'none';
             const videoContainer = document.getElementById('video-container');
             videoContainer.innerHTML = '';
 

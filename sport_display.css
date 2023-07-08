@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Diphylleia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&display=swap');
 
 * {
   margin: 0;
@@ -29,7 +31,7 @@
 }
 .navigation {
   position: relative;
-  width: 210px;
+  width: 350px;
   height: 70px;
   /**/
   background: #272b34;
@@ -139,6 +141,10 @@
 
 .main{
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .coach_names{
@@ -213,6 +219,13 @@
   justify-content: center;
 }
 
+#send-btn{
+  width:100px;
+  height:40px;
+  border-radius:5px;
+  color:black;
+}
+
 .btn-teamUp button{
   width:140px;
   height:50px;
@@ -240,3 +253,46 @@
   color:#00d0ff;
   font-size: 30px;
 }
+
+#msg-container{
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  width:500px;
+  height:500px;
+  justify-content:space-around;
+  align-items:center;
+}
+
+#msgBox{
+  width:300px;
+  height:300px;
+  border:2px solid black;
+}
+
+#send-btn{
+  font-family: "Poppins", sans-serif;
+  font-size:15px;
+  background-color: #000000;
+  color:white;
+  border:3px solid rgb(255, 0, 0);
+  width: 120px;
+}
+
+.replybox {
+  background-color: #272b34;
+  color: white;
+  padding: 55px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  box-shadow: 1px 2px 18px #414e6b;
+}
+
+#reply-container{
+  display: flex;
+  flex-direction: column;
+  gap:25px;
+}
+  

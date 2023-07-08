@@ -98,26 +98,23 @@
             document.getElementById('phno').textContent = data.phno;
             document.getElementById('achievements').value = data.achievements;
             document.getElementById('descr').value = data.bio;
-            if(Object.keys(data).length === 8)
-            {
+            // if(Object.keys(data).length === 8)
+            // {
                 
-            }
+            // }
 
             ans = data;
 
         }
-        window.onload = function()
-        {
-            fetch('/profile', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                display(data.message);
-            });
-        };
+        fetch('/profile', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            display(data.message);
+        });
     </script>
 </html>

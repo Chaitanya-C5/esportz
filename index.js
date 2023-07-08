@@ -8,8 +8,8 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const multer = require('multer');
 const path = require('path');
-const cors = require('cors');
-
+//const cors = require('cors');
+// https://weak-rose-springbok-tutu.cyclic.app/Sign_up_page.html
 class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
@@ -24,8 +24,16 @@ const db = mysql.createConnection({
     database:"esportz"
 });
 
+// const db = mysql.createConnection({
+//          host:"sql108.infinityfree.com",
+//          user:"if0_34384390",
+//          password:"atae45WRq9ij",
+//          database:"if0_34384390_esportz"
+//     });
+
 db.connect((err) =>{
     if(err){
+        console.log(err);
         console.log("Error");
     }
     else
@@ -50,7 +58,7 @@ const sessionStore = new MySQLStore({
 app.use(express.static('./'));
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/vid.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.use(session({
@@ -64,10 +72,7 @@ app.use(session({
   var flag = false;
 
 app.use(bodyParser.json());
-//app.use(cors());
 
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
 
 app.post('/submit-form', function(req, res) {
     const formData = req.body;
@@ -95,33 +100,63 @@ app.post('/submit-form', function(req, res) {
   });
 
 
+// app.post('/submit-lform', function(req, res) {
+//     const fd = req.body;
+//     let sql = `SELECT * FROM signup WHERE email = '${fd.email}'`;
+//     db.query(sql,(err,result) => {
+
+//         if(err || result.length === 0)
+//         {
+//             res.send({ message: "Invalid , try to signup if you are a new user" });
+//         }
+//         else
+//         {
+//             let str = JSON.parse(JSON.stringify(result));
+//             let p1 = str[0].password;
+        
+//             if(p1 !== fd.password) res.send({ message: "Incorrect password" });
+//             else
+//             {
+//                 req.session.isLoggedIn = true;
+//                 req.session.username = str[0].username;
+//                 req.session.email = fd.email;
+//                 req.session.role = str[0].role;
+//                 req.session.sport = str[0].favsport.toLowerCase();
+//                 flag  = true;
+//                 res.send({message: req.session.role});
+//             }
+//         }
+
+//     });
+// });
+
 app.post('/submit-lform', function(req, res) {
     const fd = req.body;
+
     let sql = `SELECT * FROM signup WHERE email = '${fd.email}'`;
     db.query(sql,(err,result) => {
+        if(err) throw err;
+        console.log(result);
 
-        if(err || result.length === 0)
+        if(result.length === 0) res.send({message: "Invalid"});
+        else 
         {
-            res.send({ message: "Invalid , try to signup if you are a new user" });
-        }
-        else
-        {
-            let str = JSON.parse(JSON.stringify(result));
-            let p1 = str[0].password;
-        
-            if(p1 !== fd.password) res.send({ message: "Incorrect password" });
-            else
+            if(result[0].password === fd.password)
             {
                 req.session.isLoggedIn = true;
-                req.session.username = str[0].username;
+                req.session.username = result[0].username;
                 req.session.email = fd.email;
-                req.session.role = str[0].role;
-                req.session.sport = str[0].favsport.toLowerCase();
+                req.session.role = result[0].role;
+                req.session.sport = result[0].favsport.toLowerCase();
                 flag  = true;
-                res.send({message: req.session.role});
+                //console.log(result[0]);
+                res.send({message: result[0].role});
+            }
+            else
+            {
+                res.send({message: "Invalid"});
             }
         }
-
     });
 });
 
@@ -153,11 +188,13 @@ app.post('/checkDB', (req,res) => {
 });
 
 app.post('/profile', (req,res) => {
-    if(flag === false) {
+    if(req.session.isLoggedIn === false) {
+
         res.send({ message: "Please login" });
     }
     else
     {
+
         let sql = `SELECT * FROM signup where email = '${req.session.email}'`;
             db.query(sql, (err,result)=>{
                 if(err)
@@ -218,30 +255,56 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
   
   app.post('/upload', upload.single('video'), async (req, res) => {
-
-    try 
-    {
-        const title = req.body.title;
-        const description = req.body.description;
-        const filename = req.file.filename;
-        // Insert video metadata into database
-        const sql = 'INSERT INTO videos (username, sport, title, description, filename) VALUES (?, ?, ?, ?, ?)';
-        db.query(sql, [req.session.username, req.session.sport, title, description, filename], function(err, result) {
-        if (err) throw err;
-        console.log('Video uploaded successfully!');
+        try {
+            const title = req.body.title;
+            const description = req.body.description;
+            const filename = req.file.filename;
         
-        });
-
-        let sql1 = `SELECT email FROM members where username = '${req.session.username}'`;
+            // Insert video metadata into database
+            let sql = `INSERT INTO videos (username, sport, title, description, filename) VALUES (?, ?, ?, ?, ?)`;
+            db.query(sql, [req.session.username, req.session.sport, title, description, filename], function(err, result) {
+                if (err) throw err;
+                console.log('Video uploaded successfully!');
         
-    }
-
-    catch (error) 
-    {
-        console.error(error);
-        res.status(500).send('Error uploading video!');
-    }
-});
+                // Check if there are members associated with the coach
+                let sql2 = 'SELECT COUNT(*) AS memberCount FROM members WHERE coach_username = ?';
+                db.query(sql2, [req.session.username], (err, result) => {
+                if (err) throw err;
+        
+                    if (result[0].memberCount === 0) {
+                        console.log("No members");
+                        const data = {
+                        flag: false
+                        };
+                        res.json(data);
+                    } 
+                    else 
+                    {
+                        // Retrieving emails of members associated with the coach
+                        let sql1 = `SELECT stud_email FROM members WHERE coach_username = '${req.session.username}'`;
+                        db.query(sql1, (err, result) => {
+                            if (err) throw err;
+                
+                            const emails = result.map((row) => row.stud_email);
+                
+                            const data = {
+                                flag: true,
+                                uname: req.session.username,
+                                emails: emails
+                            };
+            
+                            res.json(data);
+                        });
+                    }
+                });
+            });
+        } 
+        catch (error) {
+            console.error(error);
+            res.status(500).send('Error uploading video!');
+        }
+  });
+  
 
 
 
@@ -355,8 +418,8 @@ app.post('/teamup', (req, res) =>{
         }
         else
         {
-            let sql2 = `INSERT INTO members (coach_username, stud_username) VALUES (?, ?)`;
-            db.query(sql2,[coach,stud_name], (err,result) =>{
+            let sql2 = `INSERT INTO members (coach_username, stud_username, stud_email) VALUES (?, ?, ?)`;
+            db.query(sql2,[coach,stud_name,req.session.email], (err,result) =>{
                 if(err)
                 {
                     console.error('Error retrieving team members count:', err);
@@ -380,6 +443,48 @@ app.post('/checkMember',(req,res)=>{
     })  
 });
 
+app.post('/sendmsg', (req,res)=>{
+    let msg = req.body.msg;
+    
+    let sql = `INSERT INTO messages (stud_username,coach_username,message) VALUES (?,?,?)`;
+    db.query(sql,[req.session.username,req.session.cname,msg], (err,result)=>{
+        if(err) throw err;
+
+        console.log("Message Sent");
+    });
+});
+
+app.post('/showdoubts', (req,res) =>{
+    let sql = `SELECT * FROM messages where coach_username = '${req.session.username}'`;
+    db.query(sql,(err,result) =>{
+        if (err) throw err;
+
+        console.log(result);
+        res.json(result);
+    });
+});
+
+app.post('/sendReply',(req,res) =>{
+    let sql = `UPDATE messages SET reply = ? WHERE No = ?`;
+    db.query(sql,[req.body.msg,req.body.id],(err,result)=>{
+        if(err) throw err;
+
+        console.log("Reply Sent");
+    });
+    // console.log(req.body.id);
+});
+
+app.post('/showreplies',(req,res)=>{
+    const name = req.session.username;
+
+    let sql = `SELECT * FROM messages where stud_username = '${name}'`;
+    db.query(sql,(err,result)=>{
+        if(err) console.log(err);
+
+        console.log(result);
+        res.json(result);
+    });
+});
   
 app.post('/logout', (req, res) => {
     flag = false;
