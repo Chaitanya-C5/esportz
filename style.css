@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;1,100;1,200&family=Roboto:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moirai+One&display=swap');
 
 html,body{
     height: 100%;
@@ -9,74 +12,81 @@ html,body{
     font-family: 'Roboto', sans-serif;
 }
 
+.all{
+    display: flex;
+    flex-direction: column;
+    gap:30px;
+    background-color: #000000;
+}
+
 .sec-1 {
-    background-image: url(images/football-1.jpeg);
-    position: relative;
-    height: 100%;
-    background-repeat: no-repeat;
-    width: 100%;
-    background-size: cover;
+    width:100%;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    background-attachment: fixed;
-}  
+}
+
+.sec-1_sub-2 img{
+    width:100%;
+    height:100%;
+}
 
 header{
-    position: absolute;
-    top: 0;
-    left: 0px;
+    background-color: black;
     width: 100%;
-    height: 60px;
-    padding: 30px 60px;
-    display: inline-flex;
+    height: 100px;
+    display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.logo-div{
+    background-color: black;
+    padding: 0px 35px;
+}
+
+header nav{
+    background-color: #000000;
+    margin-right: 21px;
+    display: flex;
+    gap: 10px;
+}
+
 .logo{
-    font-size: 2em;
-    color: #4eb1f3;
+    font-size: 3rem;
+    color: #d40f0f;
     pointer-events: none;
     position: relative;
-    top: -18px;
+    font-family: 'Moirai One', cursive;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .links a{
+    color:black;
+    font-family: 'Staatliches','cursive';
     text-decoration: none;
-    color: black;
-    padding: 6px 15px;
-    margin: 0px 8px;
-    font-weight: 100;
+    font-size: 20px;
+    letter-spacing: 1px;
 }
 
 .bg{
-    display: inline-block;
-    background-color: #1b3147bf;
-    font-size: 14px;
-    height: 33px;
-    line-height: 29px;
-    padding: 0 15px;
-    font-weight: 400;
-    margin-left: 10px;
-    border-radius: 0%;
-    box-shadow: -6px 7px black;
-    transition: 0.2s all;
-    position: relative;
-    right: 84px;
-    top: -26px;
+    background-color: #5566b2;
+    width: 135px;
+    height: 50px;
+    border-radius: 5px;
 }
 .links a{
     color: white
 }
 .links a:hover, .links a.active{
-    color: #4eb1f3;
+    color: #ff0000;
 }
 
 .bg:active {
     transform: scale(0.98);
     box-shadow: -3px 5px black;
 }
-
-
 
 .P1{
     top: 250px;
@@ -164,6 +174,7 @@ header{
     background: linear-gradient(#333,#222);
     animation: glow .8s ease-out infinite alternate;
 }
+
 @keyframes glow{
     100%{
         border-color: #0779ea;
@@ -191,15 +202,30 @@ header{
     background: linear-gradient(#333,#222);
 }
 
-.form1 button{
+#submit_btn {
     margin-top: 30px;
     border-radius: 5px;
     font-weight: 300;
     letter-spacing: 1px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 }
 
-.form1 button:hover{
+#submit_btn input[type="submit"]{
+    color: #0096f9;
+    width: 100%;
+    background: transparent;
+    height: 100%;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+#submit_btn:hover{
     color: #16aacf;
     border: 1px solid #0dcce1;
     box-shadow: 0 0 5px rgba(13, 207, 232, 0.3),
@@ -395,115 +421,96 @@ header{
 
 /*----------------SPORTS BANNER STARTS HERE ---------*/ 
 .sports-banner-sec{
-    
+    position: relative;
+    top: 10px;
+    background-color: #000000;
     overflow: hidden;
-    position: relative;
-    height: 318px;
+    width: 99%;
+    height: 275px;
+    border: 2px solid #15fe00;
 }
+
 .banner-container{
-    display: grid;
-    margin:15px auto;
     width: 100%;
-    border:5px solid black;
-    grid-template-rows: 200px;
-    grid-template-columns: repeat(5, minmax(250px, 1fr));
-    grid-template-areas: 'b1 b2 b3 b4 b5 b6';
+    height: 100%;
+    border: 5px solid black;
+    display: flex;
+    gap: 5px;
+    
 }
 
-.cricket-txt{
-    color:white;
-    position: absolute;
-    top: 184px;
-    left: 98px;
+.cards{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    
 }
 
-.football-txt{
-    position: absolute;
-    top: 184px;
-    left: 401px;
-}
-
-.badminton-txt{
-    position: absolute;
-    top: 184px;;
-    left: 715px;
-}
-
-.chess-txt{
-    position: absolute;
-    top: 184px;
-    left: 1050px;
-}
-
-.viewall-txt{
-    position: absolute;
-    top: 184px;
-    left: 1322px;
-}
-.material-symbols-outlined{
-    transform: rotate(180deg);
+.bgs{
     position: relative;
-    bottom: 157px;
-    left: 81px;
-    color: #252525
-}
-
-.material-symbols-outlined:hover{
-    transform: translate(0px,2px);
 }
 
 .imgs{
-    opacity: 0.5;
-    width: 100%;
-    height: 200px;
+    width: 300px;
+    height: 184px;
+    position: absolute;
 }
 
-
-
-.cricket-card{
-    grid-area: b1;
-}
-
-.football-card{
-    grid-area: b2;
-}
-
-.badminton-card{
-    grid-area: b3;
-}
-
-.banner-container a{
-    color:#000000;
-}
-
-.img-badminton{
-    transform: rotate(180deg);
-    opacity: 0.8;
-}
-
-.img-chess{
-    transform: rotate(180deg);
+.emoji{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    width: 100px;
-    left: -25px;
-    top: -1px;
-}
-
-.imgs:hover{
-    opacity:1;
+    top: 40px;
 
 }
 
+.cricket-emoji span{
+    transform: rotate(180deg);
+}
+
+.material-symbols-outlined{
+    color:rgb(0, 0, 0);
+}
+
+.txts{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.txts a{
+    text-decoration: none;
+    color: black;
+}
+
+.top-part{
+    background: black;
+    height: 68%;
+}
+
+.down-part{
+    background-color:#17bbe8;
+    height: 32%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /*----------------SPORTS BANNER ENDS HERE ---------*/ 
 
 /*---------------- CARDS STARTS HERE --------------*/
 
-.cards {
+.cards-sec {
     
     height: 400px;
     width:100%;
-    
+    background-color: black;
     color: #fff;
     font-family: Arial, sans-serif;
 }
@@ -543,7 +550,7 @@ header{
     margin-top: 20px;
 }
 
-/*---------------- CARDS ENDS HERE --------------*/
+/*---------------- CARDS-sec ENDS HERE --------------*/
 
 /*---------------- FOOTER STARTS HERE --------------*/
 

@@ -1,3 +1,8 @@
+//const cors = require('cors');
+// https://weak-rose-springbok-tutu.cyclic.app/Sign_up_page.html
+
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const { createConnection } = require('net');
@@ -8,28 +13,26 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const multer = require('multer');
 const path = require('path');
-//const cors = require('cors');
-// https://weak-rose-springbok-tutu.cyclic.app/Sign_up_page.html
+
+// Loading environment variables
+const dbHost = process.env.DB_HOST;
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
+const dbDatabase = process.env.DB_DATABASE;
+const dbPort = process.env.PORT || 3000;
+
 class MyEmitter extends EventEmitter {}
 
 const myEmitter = new MyEmitter();
 
 const app = express(); 
-const port = 3000;
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"esportz"
+    host: dbHost,
+    user: dbUser,
+    password: dbPassword,
+    database: dbDatabase
 });
-
-// const db = mysql.createConnection({
-//          host:"sql108.infinityfree.com",
-//          user:"if0_34384390",
-//          password:"atae45WRq9ij",
-//          database:"if0_34384390_esportz"
-//     });
 
 db.connect((err) =>{
     if(err){
@@ -46,6 +49,17 @@ const sessionStore = new MySQLStore({
     expiration: 86400000 // session expiration time (ms)
   }, db);
 
+// Rest of the code...
+// const db = mysql.createConnection({
+    //          host:"sql108.infinityfree.com",
+    //          user:"if0_34384390",
+    //          password:"atae45WRq9ij",
+    //          database:"if0_34384390_esportz"
+    //     });
+
+// });
+
+
 // app.get('/',(req,res)=>{
 //     let sql = "CREATE DATABASE esportz";
 //     db.query(sql,(err,result)=>{
@@ -54,6 +68,9 @@ const sessionStore = new MySQLStore({
 //         res.send("Database created");
 //     });
 // });
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.use(express.static('./'));
 
@@ -70,9 +87,6 @@ app.use(session({
   }));
 
   var flag = false;
-
-app.use(bodyParser.json());
-
 
 app.post('/submit-form', function(req, res) {
     const formData = req.body;
@@ -100,35 +114,41 @@ app.post('/submit-form', function(req, res) {
   });
 
 
-// app.post('/submit-lform', function(req, res) {
-//     const fd = req.body;
-//     let sql = `SELECT * FROM signup WHERE email = '${fd.email}'`;
-//     db.query(sql,(err,result) => {
+app.post("/loginuser", function(req, res) {
+    const fd = req.body;
 
-//         if(err || result.length === 0)
-//         {
-//             res.send({ message: "Invalid , try to signup if you are a new user" });
-//         }
-//         else
-//         {
-//             let str = JSON.parse(JSON.stringify(result));
-//             let p1 = str[0].password;
-        
-//             if(p1 !== fd.password) res.send({ message: "Incorrect password" });
-//             else
-//             {
-//                 req.session.isLoggedIn = true;
-//                 req.session.username = str[0].username;
-//                 req.session.email = fd.email;
-//                 req.session.role = str[0].role;
-//                 req.session.sport = str[0].favsport.toLowerCase();
-//                 flag  = true;
-//                 res.send({message: req.session.role});
-//             }
-//         }
+    let sql = `SELECT * FROM signup WHERE email = '${fd.email}'`;
+    db.query(sql,(err,result) => {
+        if(err) throw err;
+        console.log(result);
 
-//     });
-// });
+        if(result.length === 0) res.send("<html><body><center> <h1> INVALID </h1> </center></body></html>");
+        else 
+        {
+            console.log(result[0].password," ",fd.password);
+            if(result[0].password === fd.password)
+            {
+                req.session.isLoggedIn = true;
+                req.session.username = result[0].username;
+                req.session.email = fd.email;
+                req.session.role = result[0].role;
+                req.session.sport = result[0].favsport.toLowerCase();
+                flag  = true;
+                
+
+                if(req.session.role === "coach")
+                    res.sendFile(__dirname+"\\coach_page.html");
+                else
+                    res.sendFile(__dirname+"\\index2.html");
+            }
+            else
+            {
+                res.send("<html><body><center> <h1> INVALID </h1> </center></body></html>");
+            }
+        }
+    });
+
+});
 
 app.post('/submit-lform', function(req, res) {
     const fd = req.body;
@@ -486,14 +506,14 @@ app.post('/showreplies',(req,res)=>{
     });
 });
   
-app.post('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
     flag = false;
     req.session.destroy();
     res.redirect('/');
   });
 
-app.listen(port,() =>{
-    console.log(`Server is successfully running on port ${port}`);
+app.listen(dbPort,() =>{
+    console.log(`Server is successfully running on port ${dbPort}`);
 });
 
 
@@ -501,3 +521,4 @@ app.listen(port,() =>{
 //     const messages = ['Hello', 'World', 'from', 'EJS'];
 //     res.render('indeex', { messages });
 //   });
+
