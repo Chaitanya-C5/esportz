@@ -7,7 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { createConnection } = require('net');
 const nodemailer = require('nodemailer');
-const EventEmitter = require('node:events');
+//const EventEmitter = require('node:events');
 const mysql = require('mysql');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
@@ -21,9 +21,9 @@ const dbPassword = process.env.DB_PASSWORD;
 const dbDatabase = process.env.DB_DATABASE;
 const dbPort = process.env.PORT || 3000;
 
-class MyEmitter extends EventEmitter {}
+//class MyEmitter extends EventEmitter {}
 
-const myEmitter = new MyEmitter();
+//const myEmitter = new MyEmitter();
 
 const app = express(); 
 
@@ -96,7 +96,7 @@ app.post('/submit-form', function(req, res) {
     [formData.name,formData.email,formData.password,formData.phone,formData.role,formData.age,formData.gender,
     formData.country,formData.favouriteSport],(err,result) =>{
         if(err) 
-            myEmitter.emit('error', new Error('Something went wrong --Signup'));
+            //myEmitter.emit('error', new Error('Something went wrong --Signup'));
         console.log("records inserted in signup"+result.affectedRows);
 
     });
@@ -105,7 +105,7 @@ app.post('/submit-form', function(req, res) {
         db.query("INSERT INTO coach (username,email,sport,achievements,bio) VALUES (?,?,?,?,?)",
             [formData.name,formData.email,formData.favouriteSport,"Enter your achievements","Enter your bio"],(err,result) =>{
                 if(err)
-                    myEmitter.emit('error', new Error('Something went wrong --coach'));
+                   // myEmitter.emit('error', new Error('Something went wrong --coach'));
                 console.log("records inserted in coach"+result.affectedRows);
             }
         );
@@ -219,7 +219,7 @@ app.post('/profile', (req,res) => {
             db.query(sql, (err,result)=>{
                 if(err)
                 {
-                    myEmitter.emit('error', new Error('Something went wrong'));
+                   // myEmitter.emit('error', new Error('Something went wrong'));
                 }
                 else
                 { 
