@@ -324,7 +324,7 @@ const storage = multer.diskStorage({
                         const data = {
                         flag: false
                         };
-                        res.json(data);
+                        res.send(data);
                     } 
                     else 
                     {
@@ -341,7 +341,7 @@ const storage = multer.diskStorage({
                                 emails: emails
                             };
             
-                            res.json(data);
+                            res.send(data);
                         });
                     }
                 });
