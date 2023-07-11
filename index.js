@@ -7,7 +7,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { createConnection } = require('net');
 const nodemailer = require('nodemailer');
-const EventEmitter = require('node:events');
+const { EventEmitter } = require('events');
+
 const mysql = require('mysql');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
