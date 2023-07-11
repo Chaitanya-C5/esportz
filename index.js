@@ -90,27 +90,54 @@ app.use(session({
 
 app.post('/submit-form', function(req, res) {
     const formData = req.body;
+
+    let sql = `SELECT * FROM signup where username = '${formData.name}' or email = '${formData.email}'`;
+
+    db.query(sql,(err,result)=>{
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+            if(result.length === 0) 
+            {
+                db.query("INSERT INTO signup (username,email,password,phno,role,age,gender,country,favsport) VALUES (?,?,?,?,?,?,?,?,?)",
+                [formData.name,formData.email,formData.password,formData.phone,formData.role,formData.age,formData.gender,
+                formData.country,formData.favouriteSport],(err,result) =>{
+                    if(err) 
+                        myEmitter.emit('error', new Error('Something went wrong --Signup'));
+                    console.log("records inserted in signup"+result.affectedRows);
+
+                });
+
+                if(formData.role === "coach"){
+                    db.query("INSERT INTO coach (username,email,sport,achievements,bio) VALUES (?,?,?,?,?)",
+                        [formData.name,formData.email,formData.favouriteSport,"Enter your achievements","Enter your bio"],(err,result) =>{
+                            if(err)
+                                myEmitter.emit('error', new Error('Something went wrong --coach'));
+                            console.log("records inserted in coach"+result.affectedRows);
+                        }
+                    );
+                }
+                const obj = {
+                    code: 1,
+                    message: formData.email
+                };
+                res.send({obj});
+            }
+            else
+            {
+                const obj = {
+                    code: 2,
+                    message:"Username or Email already exists"
+                };
+                res.send(obj);
+            }
+        }
+    });
   
 
-    db.query("INSERT INTO signup (username,email,password,phno,role,age,gender,country,favsport) VALUES (?,?,?,?,?,?,?,?,?)",
-    [formData.name,formData.email,formData.password,formData.phone,formData.role,formData.age,formData.gender,
-    formData.country,formData.favouriteSport],(err,result) =>{
-        if(err) 
-            myEmitter.emit('error', new Error('Something went wrong --Signup'));
-        console.log("records inserted in signup"+result.affectedRows);
-
-    });
-
-    if(formData.role === "coach"){
-        db.query("INSERT INTO coach (username,email,sport,achievements,bio) VALUES (?,?,?,?,?)",
-            [formData.name,formData.email,formData.favouriteSport,"Enter your achievements","Enter your bio"],(err,result) =>{
-                if(err)
-                    myEmitter.emit('error', new Error('Something went wrong --coach'));
-                console.log("records inserted in coach"+result.affectedRows);
-            }
-        );
-    }
-    res.send({message: formData.email});
+    
   });
 
 

@@ -152,7 +152,7 @@
                     sport: sportName,
                     coach: coachName
                   };
-
+                  
                   fetch('/clkd_sport', {
                     method: 'POST',
                     headers: {
@@ -171,6 +171,7 @@
 
                     console.error("An error occurred while sending data to the server:", error);
                   });
+
                 });
 
                 coachNamesContainer.appendChild(box);

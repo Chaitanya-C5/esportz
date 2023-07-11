@@ -206,14 +206,16 @@ submitBtn.addEventListener('click', function() {
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Form data submitted successfully');
-
+                    if((data.obj.code)=== 1)
+                    {
+                        console.log('Form data submitted successfully');
+                        console.log("hi");
 
                         Email.send({
                             Host : "smtp.elasticemail.com",
                             Username : "gellachaitanyavenkatasai@gmail.com",
                             Password : "AF3CEC532F9670F7247E76446040AF504E1D",
-                            To : data.message,
+                            To : data.obj.message,
                             From : "gellachaitanyavenkatasai@gmail.com",
                             Subject : "Successful SIGNUP",
                             Body : "Welcome to E-SPORTZ now you are one of our team member..."
@@ -221,7 +223,13 @@ submitBtn.addEventListener('click', function() {
                         
                         setTimeout(function() {
                             window.location.href = "./login_page.html";
+                            console.log("hi");
                           }, 5000);
+                    }
+                    else
+                    {
+                        alert(data.obj.message);
+                    }
                         
                 })
                 .catch(error => {

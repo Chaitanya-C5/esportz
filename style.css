@@ -54,7 +54,7 @@ header nav{
 
 .logo{
     font-size: 3rem;
-    color: #d40f0f;
+    color: #ffffff;
     pointer-events: none;
     position: relative;
     font-family: 'Moirai One', cursive;
@@ -618,11 +618,9 @@ top: 50px;
 .circle {
     height: 40px;
     width: 40px;
-    background-color: transparent;
+    background-color: #5566b2;
     border-radius: 50%;
-    position: relative;
-    right: 76px;
-    top: -13px;
+    padding: 3px;
 }
 
 .myDropdown {
@@ -631,18 +629,14 @@ top: 50px;
     background-color: black;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    right: 130px;
+    right: 24px;
+    top: 80px;
 }
 
 .dropcolor{
     background: white;
 }
 
-#profile{
-    position:relative;
-    right:26px;
-    top:-3px;
-}
 /* Style for the dropdown options */
 .myDropdown a {
     color: black;
@@ -656,6 +650,22 @@ top: 50px;
     background-color: #100f0f;
     color: #4eb1f3;
 }
+
+.mix{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.op {
+    box-shadow: 0 3px 4px 0 #DBEDF3;
+    opacity: 0.5;
+  }
 
 /*------------------ INDEX2 ENDS HERE ---------------->
 
