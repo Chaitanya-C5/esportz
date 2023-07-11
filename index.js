@@ -165,9 +165,9 @@ app.post("/loginuser", function(req, res) {
                 
 
                 if(req.session.role === "coach")
-                    res.sendFile(__dirname+"\coach_page.html");
+                    res.sendFile(__dirname+ '/coach_page.html');
                 else
-                    res.sendFile(__dirname+"\index2.html");
+                    res.sendFile(__dirname+ '/index2.html');
             }
             else
             {
