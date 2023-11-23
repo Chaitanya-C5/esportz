@@ -1,4 +1,3 @@
-//const cors = require('cors');
 // https://esportz.onrender.com/
 
 require('dotenv').config(); // Load environment variables from .env file
