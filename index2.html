@@ -46,7 +46,7 @@
 
             <section class="sports-banner-sec">
                 <div class="banner-container">
-                    <div class="cards cricket-card" onmouseover="f2(this)" onmouseout="f3(this)">
+                    <div class="sport_card cards cricket-card" onmouseover="f2(this)" onmouseout="f3(this)" value="cricket">
                         <div class="top-part">
                             <div class="bgs cricket-bg">
                                 <img class="imgs" src="images/cricket-img.png">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
 
-                    <div class="cards football-card" onmouseover="f2(this)" onmouseout="f3(this)">
+                    <div class="sport_card cards football-card" onmouseover="f2(this)" onmouseout="f3(this)" value="football">
                         <div class="top-part">
                             <div class="bgs football-bg">
                                 <img class="imgs imgs-football" src="images/football-card.jpg">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     
-                    <div class="cards badminton-card" onmouseover="f2(this)" onmouseout="f3(this)">
+                    <div class="sport_card cards badminton-card" onmouseover="f2(this)" onmouseout="f3(this)" value="badminton">
                         <div class="top-part">
                             <div class="bgs badminton-bg">
                                 <img class="imgs" src="images/badminton.jpg">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cards chess-card" onmouseover="f2(this)" onmouseout="f3(this)">
+                    <div class="sport_card cards chess-card" onmouseover="f2(this)" onmouseout="f3(this)" value="chess">
                         <div class="top-part">
                                 <div class="bgs chess-bg">
                                 <img class="imgs" src="images/chess.avif">
@@ -132,7 +132,7 @@
 
                         <div class="down-part">
                             <div class="txts viewall-txt">
-                                <h3><a href="#">VIEW ALL</a></h3>
+                                <h3><a href="./sportspage.html">VIEW ALL</a></h3>
                             </div>
                         </div>
                     </div>
@@ -268,6 +268,35 @@
         
     </body>
     <script>
+        var elements = document.querySelectorAll('.sport_card');
+
+            
+        elements.forEach(function(element) {
+        element.addEventListener('click', function() {
+            
+            var sportName = element.getAttribute('value');
+            console.log(sportName);
+
+
+            fetch('/sport', {
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({ value: sportName })
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                console.log("HI "+data.message);
+                window.open('./dev.html');
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        });
+        });
+
         function f1()
         {
             window.location.href='./login_page.html';
@@ -280,16 +309,16 @@
         {
             val.style.opacity = "1";
         }
-        fetch('/fetchName', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            alert("Hello " + data.message);
-          })
+        // fetch('/fetchName', {
+        //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        //   })
+        //   .then(response => response.json())
+        //   .then(data => {
+        //     alert("Hello " + data.message);
+        //   })
     
         function account()
         {

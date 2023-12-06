@@ -211,71 +211,64 @@
         list.forEach((item) => item.addEventListener("click", activeLink));
         
         window.onload = function () {
+    Promise.all([
         fetch('/coach_videos', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }),
+        fetch('/checkMember', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         })
-        .then(response => response.json())
-        .then(videos => {
+    ])
+    .then(responses => Promise.all(responses.map(response => response.json())))
+    .then(([videos, data]) => {
+        document.getElementById('msg-container').style.display = 'none';
+        const videoContainer = document.getElementById('video-container');
+        videoContainer.innerHTML = '';
 
-            document.getElementById('msg-container').style.display = 'none';
-            const videoContainer = document.getElementById('video-container');
-            videoContainer.innerHTML = '';
+        const cname = document.getElementById('cname').innerHTML = videos[0].name;
 
-            const cname = document.getElementById('cname').innerHTML = videos[0].name;
-
-            videos.forEach(video => {
+        videos.forEach(video => {
             const videoDiv = document.createElement('div');
             const titleHeading = document.createElement('h3');
             titleHeading.textContent = video.title;
             titleHeading.style.display = "inline";
             videoDiv.appendChild(titleHeading);
-            
+
             const descParagraph = document.createElement('p');
             descParagraph.textContent = video.description;
             descParagraph.style.display = "inline";
             videoDiv.appendChild(descParagraph);
 
             const videoElement = document.createElement('video');
-            videoElement.src = video.url; 
+            videoElement.src = video.url;
             videoElement.width = '540';
             videoElement.height = '360';
-            videoElement.autoplay = false; 
-            videoElement.controls = true; 
+            videoElement.autoplay = false;
+            videoElement.controls = true;
             videoDiv.appendChild(videoElement);
             videoDiv.style.width = "600";
             videoDiv.style.display = "flex";
             videoDiv.style.flexDirection = "column";
             videoContainer.appendChild(videoDiv);
-                
-            });
-        })
-        .catch(error => {
-            console.error('Error retrieving videos:', error);
         });
 
-        fetch('/checkMember',{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data.message);
-          if(data.message === 1)
-          {
+        console.log(data.message);
+        if (data.message === 1) {
             const teamUpButton = document.getElementById('teamUpButton');
             teamUpButton.textContent = 'Teamed Up';
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-        
-    }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 
       // JavaScript code for handling the "Team Up" button click
       const teamUpButton = document.getElementById('teamUpButton');

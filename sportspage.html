@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> SPORTS </title>
+        <title> SPORTS PAGE </title>
         <link rel="stylesheet" href="sports.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -24,7 +24,7 @@
                     </a>
                   </li>
                   <li class="list">
-                    <a id="profile" href="#">
+                    <a id="profile" href="./profiles.html">
                       <span class="icon">
                         <ion-icon name="person-outline"></ion-icon>
                       </span>
@@ -344,15 +344,12 @@
 
             }
 
-            // Select all elements with the specified class
             var elements = document.querySelectorAll('.card');
 
-            // Iterate over the elements and add an onclick event listener to each
+            
             elements.forEach(function(element) {
             element.addEventListener('click', function() {
-                // Code to handle the click event
-                // Retrieve content from the database based on the clicked element
-
+                
                 var sportName = element.getAttribute('value');
                 console.log(sportName);
 
