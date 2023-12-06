@@ -416,7 +416,7 @@ app.post('/clkd_sport', (req,res) => {
     res.send("ok");
 });
 
-app.get('/coach_videos', (req, res) => 
+app.get('/coach_videos', async (req, res) => 
 {
     const uname =  req.session.cname;
     const sport = req.session.clkd_sport;
