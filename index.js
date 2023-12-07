@@ -3,9 +3,6 @@
 require('dotenv').config(); // Load environment variables from .env file
 
 const express = require('express');
-const bodyParser = require('body-parser');
-const { createConnection } = require('net');
-const nodemailer = require('nodemailer');
 const { EventEmitter } = require('events');
 
 const mysql = require('mysql');

@@ -107,13 +107,24 @@
                                 <option value="tennis">TENNIS</option>
                             </select>
                         </div>
+                        <small id="infosport">You will teach this sport as a coach.</small> 
                     </form>
                 </div>
-            </div>     
-
+            </div> 
             <button id="submit"  class="signup-btn">SIGN UP</button>
         </div>
+           
     </body>
+    <script>
+       document.querySelectorAll('input[name="role"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+        var coachInfo = document.getElementById('infosport');
+        coachInfo.style.display = this.value === 'coach' ? 'block' : 'none';
+    });
+  });
+
+
+    </script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="code.js"> </script> 
     

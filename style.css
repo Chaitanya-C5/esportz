@@ -280,6 +280,14 @@ header nav{
 
 /*----------------SIGN UP STARTS HERE -----------------*/
 
+#infosport{
+    display: none;
+    position: relative;
+    top:35px;
+    left: 15px;
+    color:#0cb5ee;
+}
+
 .signup-form{
     width: 1000px;
     position: relative;

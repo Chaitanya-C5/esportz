@@ -1,5 +1,6 @@
 let isValid = true;
 let count = 0;
+
 function validateForm()
 {
     isValid = true;
